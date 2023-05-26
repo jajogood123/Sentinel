@@ -106,7 +106,9 @@ public class ArrayMetric implements Metric {
 
     @Override
     public long pass() {
+        // TODO-SZY: 2023/5/25 这里面的逻辑有重新分配array的逻辑，这里就是为了及时更新array，然后计算总的qps
         data.currentWindow();
+
         long pass = 0;
         List<MetricBucket> list = data.values();
 

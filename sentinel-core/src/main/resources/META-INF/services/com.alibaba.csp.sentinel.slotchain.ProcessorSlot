@@ -1,4 +1,5 @@
 # Sentinel default ProcessorSlots
+# 构造的slot
 com.alibaba.csp.sentinel.slots.nodeselector.NodeSelectorSlot
 com.alibaba.csp.sentinel.slots.clusterbuilder.ClusterBuilderSlot
 com.alibaba.csp.sentinel.slots.logger.LogSlot

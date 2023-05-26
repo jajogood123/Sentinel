@@ -67,6 +67,7 @@ public class ClusterBuilderSlot extends AbstractLinkedProcessorSlot<DefaultNode>
      * at the very beginning while concurrent map will hold the lock all the time.
      * </p>
      */
+    // TODO-SZY: 2023/5/25 那这种设置一个map是干嘛的，因为只有相同类型的资源才能获取到同一个slot。注意，这里的修饰是一个static
     private static volatile Map<ResourceWrapper, ClusterNode> clusterNodeMap = new HashMap<>();
 
     private static final Object lock = new Object();

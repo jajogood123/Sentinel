@@ -50,7 +50,7 @@ public final class InitExecutor {
                 insertSorted(initList, initFunc);
             }
             for (OrderWrapper w : initList) {
-                w.func.init();
+                w.getFunc().init();
                 RecordLog.info("[InitExecutor] Executing {} with order {}",
                     w.func.getClass().getCanonicalName(), w.order);
             }

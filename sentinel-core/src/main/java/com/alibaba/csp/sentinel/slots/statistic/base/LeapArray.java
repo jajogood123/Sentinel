@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 import java.util.concurrent.locks.ReentrantLock;
 
+import com.alibaba.csp.sentinel.slots.statistic.data.MetricBucket;
 import com.alibaba.csp.sentinel.util.AssertUtil;
 import com.alibaba.csp.sentinel.util.TimeUtil;
 
@@ -40,9 +41,15 @@ import com.alibaba.csp.sentinel.util.TimeUtil;
  */
 public abstract class LeapArray<T> {
 
+    // 窗口的宽度，500ms,1000ms
     protected int windowLengthInMs;
+
+    // 采集数量，2,6
     protected int sampleCount;
+
+    // 间隔长度，100ms,6000ms
     protected int intervalInMs;
+
     private double intervalInSecond;
 
     protected final AtomicReferenceArray<WindowWrap<T>> array;
@@ -117,9 +124,9 @@ public abstract class LeapArray<T> {
         if (timeMillis < 0) {
             return null;
         }
-
+        // 位于窗口数组的哪一个位置
         int idx = calculateTimeIdx(timeMillis);
-        // Calculate current bucket start time.
+        // 窗口开始的时间
         long windowStart = calculateWindowStart(timeMillis);
 
         /*

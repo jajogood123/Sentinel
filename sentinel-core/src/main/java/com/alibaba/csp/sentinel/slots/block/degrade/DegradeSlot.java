@@ -34,6 +34,7 @@ import com.alibaba.csp.sentinel.spi.Spi;
  * @author Carpenter Lee
  * @author Eric Zhao
  */
+// TODO-SZY: 2023/5/25 这个的作用是干嘛的
 @Spi(order = Constants.ORDER_DEGRADE_SLOT)
 public class DegradeSlot extends AbstractLinkedProcessorSlot<DefaultNode> {
 

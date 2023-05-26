@@ -71,6 +71,7 @@ public class MetricBucket {
     }
 
     public MetricBucket add(MetricEvent event, long n) {
+        // TODO-SZY: 2023/5/25 ordinal()获取枚举定义的顺序，0，1，2，3
         counters[event.ordinal()].add(n);
         return this;
     }

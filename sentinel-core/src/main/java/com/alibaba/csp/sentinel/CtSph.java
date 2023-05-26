@@ -133,6 +133,7 @@ public class CtSph implements Sph {
             return new CtEntry(resourceWrapper, null, context);
         }
 
+        // TODO-SZY: 2023/5/25 相同类型的资源获取到的是一个实例的chain 
         ProcessorSlot<Object> chain = lookProcessChain(resourceWrapper);
 
         /*

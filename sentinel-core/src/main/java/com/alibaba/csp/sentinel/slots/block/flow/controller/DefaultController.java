@@ -46,6 +46,7 @@ public class DefaultController implements TrafficShapingController {
     }
 
     @Override
+    // TODO-SZY: 2023/5/25 正常情况下这里是ClusterNode
     public boolean canPass(Node node, int acquireCount, boolean prioritized) {
         int curCount = avgUsedTokens(node);
         if (curCount + acquireCount > count) {
@@ -53,6 +54,7 @@ public class DefaultController implements TrafficShapingController {
                 long currentTime;
                 long waitInMs;
                 currentTime = TimeUtil.currentTimeMillis();
+                // TODO-SZY: 2023/5/25 这里的意思需要看下 ;prioritized是干嘛的
                 waitInMs = node.tryOccupyNext(currentTime, acquireCount, count);
                 if (waitInMs < OccupyTimeoutProperty.getOccupyTimeout()) {
                     node.addWaitingRequest(currentTime + waitInMs, acquireCount);

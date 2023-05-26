@@ -129,7 +129,12 @@ public class NodeSelectorSlot extends AbstractLinkedProcessorSlot<Object> {
 
     /**
      * {@link DefaultNode}s of the same resource in different context.
+     * 1.相同的资源，相同context.同一个DefaultNode
+     * 2.不同的资源，相同context.不同的资源不会持有同一个NodeSelectorSlot
+     * 3.相同资源，不同context.不同的DefaultNode
+     * 4.不同资源，不同context.不同的资源不会只有同一个NodeSelectorSlot
      */
+    // TODO-SZY: 2023/5/25 注意这里的修饰没有static
     private volatile Map<String, DefaultNode> map = new HashMap<String, DefaultNode>(10);
 
     @Override
@@ -153,6 +158,9 @@ public class NodeSelectorSlot extends AbstractLinkedProcessorSlot<Object> {
          * The answer is all {@link DefaultNode}s with same resource name share one
          * {@link ClusterNode}. See {@link ClusterBuilderSlot} for detail.
          */
+        // TODO-SZY: 2023/5/25 什么情况下一个资源会创建多个DefaultNode，
+        //  答案是上下文的name不同，但是代码里看到context的上下文名称就一个啊，
+        //  context上下文的名称是可以指定的com.alibaba.csp.sentinel.context.ContextUtil.enter(java.lang.String, java.lang.String)
         DefaultNode node = map.get(context.getName());
         if (node == null) {
             synchronized (this) {

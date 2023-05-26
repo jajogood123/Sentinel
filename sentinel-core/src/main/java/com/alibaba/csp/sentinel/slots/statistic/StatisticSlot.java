@@ -49,6 +49,7 @@ import com.alibaba.csp.sentinel.slots.block.BlockException;
  * @author Eric Zhao
  */
 @Spi(order = Constants.ORDER_STATISTIC_SLOT)
+// TODO-SZY: 2023/5/25 这个是sentinel的核心
 public class StatisticSlot extends AbstractLinkedProcessorSlot<DefaultNode> {
 
     @Override
